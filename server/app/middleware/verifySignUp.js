@@ -10,10 +10,14 @@ checkDuplicateEmail = (req, res, next) => {
         }).then(user => {
             console.log(user);
         if (user) {
-            res.status(400).send({
-            message: "El correo ya existe"
+            res.status(200).send({
+            message: "400"
             });
             return;
+        }else{
+            res.status(200).send({
+            message: "200"
+            });
         }
         next();
     });   

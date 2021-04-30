@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import { Redirect } from 'react-router';
 import './Register.css';
 import AuthService from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 const Register = () => {
 
@@ -22,11 +23,30 @@ const Register = () => {
   const [vApellido, setApellido] = React.useState("");
   const [vPass, setPass] = React.useState("");
   const [vRedirect, setRedirect] = React.useState(false);
-
+  const [vInvalid, setInvalid] = React.useState("");
+  const [vErrorPass, setErrorPass] = React.useState(false);
+  const [vHelperPass, setHelperPass] = React.useState("");
+  
   function handleSubmit(){
     AuthService.register(vNombre, vApellido, vEmail, vPass).then(response=>{
-      if (response.message === 200){
-
+      console.log("handleSubmit :" + response.message);
+      if (response.message === "200"){   
+        setInvalid("");     
+          Swal.fire({
+            icon: 'success',
+            title: 'Registro',
+            confirmButtonText: 'OK',
+            text: 'Te haz registrado correctamente',
+            footer: '',
+            showCloseButton: false
+        })
+        .then(function (result) {
+            if (result.value) {
+              setRedirect(true);
+            }
+        })
+      }else if(response.message === "400"){
+        setInvalid("El correo ya existe.");
       }
     });    
   }
@@ -65,13 +85,13 @@ const Register = () => {
                 <TextField variant="outlined" required fullWidth id="email" label="Correo Electrónico"
                   name="email" onChange={(e) =>{
                     setEmail(e.target.value);
-                    let reg = new RegExp(/@/g).test(vEmail);
-                    if(!reg){
-                      setError(true);
-                      setHelper("Correo invalido");
-                    }else{
+                    let cont = vEmail.indexOf("@");
+                    if(cont > 0){
                       setError(false);
                       setHelper("");
+                    }else{                      
+                      setError(true);
+                      setHelper("Correo invalido");
                     }
                   }} error={vError} helperText={vHelper}/>
               </Grid>
@@ -80,9 +100,19 @@ const Register = () => {
                   label="Contraseña" type="password" id="password" autoComplete="current-password"
                   onChange={(e)=>{
                     setPass(e.target.value);
-                  }}
-                />
+                    let long = e.target.value.length;                    
+                    if(long < 8 || long > 20){
+                      setErrorPass(true);
+                      setHelperPass("La longitud de la contraseña debe ser entre 8 y 20 caracteres.");
+                    }else{
+                      setErrorPass(false);
+                      setHelperPass("");
+                    }
+                  }} error={vErrorPass} helperText={vHelperPass}/>
               </Grid>
+            </Grid>
+            <Grid container>
+              <label className="errorLabel">{vInvalid}</label>
             </Grid>
             <Button fullWidth variant="contained" color="primary" className={classes.submit}
             onClick={handleSubmit}>

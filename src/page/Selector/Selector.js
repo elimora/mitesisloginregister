@@ -12,7 +12,7 @@ return (
                 <h2>Correo Electronico</h2>
             </div>
         </a>
-        <a className="cardChat" href="/login">
+        <a className="cardChat" href="/register">
             <div className="cardChat-image"></div>
             <div className="cardChat-text">
                 <h2>Chat</h2>

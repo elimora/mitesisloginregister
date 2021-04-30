@@ -15,6 +15,7 @@ import './Login.css';
 
 const Login = () =>{
 
+  //Hooks
   const [vEmail, setEmail] = React.useState("");
   const [vPass, setPass] = React.useState("");
   const [vHelper, setHelper] = React.useState("");
@@ -22,6 +23,7 @@ const Login = () =>{
   const [vInvalid, setInvalid] = React.useState("");
   const [vRedirect, setRedirect] = React.useState(false);
 
+//Validacion de correo y contraseña correctos
   function handleSubmit(){
     AuthService.login(vEmail, vPass).then((response)=>{
       if (response.message === "200"){        
@@ -55,14 +57,16 @@ const Login = () =>{
             <TextField variant="outlined" margin="normal" required fullWidth id="email"
               label="Correo Electrónico" name="email" autoComplete="email" autoFocus
               onChange={(e) =>{
+
+                //Validación en tiempo real del correo
                 setEmail(e.target.value);
-                let reg = new RegExp(/@/g).test(vEmail);
-                if(!reg){
-                  setError(true);
-                  setHelper("Correo invalido");
-                }else{
+                let cont = vEmail.indexOf("@");
+                if(cont > 0){
                   setError(false);
                   setHelper("");
+                }else{                  
+                  setError(true);
+                  setHelper("Correo invalido");
                 }
               }} error={vError} helperText={vHelper}/>
             <TextField variant="outlined" margin="normal" required fullWidth name="password"
@@ -79,7 +83,7 @@ const Login = () =>{
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/register" variant="body2">
+                <Link href='/register' variant="body2">
                     {"¿No tienes una cuenta? Registrate"}
                 </Link>
               </Grid>
