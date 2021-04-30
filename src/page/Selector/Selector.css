@@ -1,0 +1,90 @@
+.container{
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+}
+.cardCorreo{
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows: 210px 210px 80px;
+    grid-template-areas: "image" "text";
+    height: 450px;
+    width: 300px;
+    font-family: roboto;
+    border-radius: 18px;
+    background:lightcoral;
+    box-shadow: 10px 10px 30px -2px rgba(0,0,0,0.75);
+    text-align: center;
+    margin-top: 6%;
+    margin-left: 20%;
+    float: left;
+    transition: 0.5s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cardCorreo-image{
+    grid-area: image;
+    background: url('../../assets/images/email.jpg');
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+}
+
+.cardCorreo-text{
+    grid-area: text;
+    margin: 25px;
+    padding-top: 130px;
+
+}
+
+.cardChat{
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows: 210px 210px 80px;
+    grid-template-areas: "image" "text";
+    height: 450px;
+    width: 300px;
+    font-family: roboto;
+    border-radius: 18px;
+    background:lightcoral;
+    box-shadow: 10px 10px 30px -2px rgba(0,0,0,0.75);
+    text-align: center;
+    margin-top: 6%;
+    margin-left: 55%;
+    position: absolute;
+    transition: 0.5s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cardChat-image{
+    grid-area: image;
+    background: url('../../assets/images/chat.png');
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+}
+
+.cardChat-text{
+    grid-area: text;
+    margin: 25px;
+    padding-top: 130px;
+
+}
+
+.cardCorreo:hover{
+    transform: scale(1.1);
+}
+
+.cardChat:hover{
+    transform: scale(1.1);
+}
+
+h2{
+    color: black;
+}
+

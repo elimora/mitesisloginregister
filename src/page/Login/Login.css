@@ -1,0 +1,29 @@
+.root {
+    height: 100vh;
+  }
+
+.image {
+  background-image: url('../../assets/images/security.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.paper {
+  margin: 8em 4em 0 4em ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  margin: 1em;
+}
+
+.form {
+  width: 100%;
+  margin-top: 1em;
+}
+
+.errorLabel{
+  color:red;
+}
